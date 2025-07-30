@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar sesión</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <div class="background"></div> <!-- Fondo desenfocado -->
+
+  <main class="login-card">
+    <h2>Login</h2>
+    <form id="form-login">
+      <input type="email" id="login-correo" placeholder="Correo electrónico" required />
+      <input type="password" id="login-password" placeholder="Contraseña" required />
+      <p class="error-text" id="login-error"></p>
+      <button type="submit">Ingresar</button>
+    </form>
+    <div class="bottom-text">
+      ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
+    </div>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>

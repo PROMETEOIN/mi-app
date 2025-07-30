@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crear un grupo</title>
+  <link rel="stylesheet" href="nuevo-grupo.css" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <a href="grupos.html" class="cancelar">Cancelar</a>
+    <h1 class="titulo">Crear un grupo</h1>
+    <a href="#" class="listo">Listo</a>
+  </header>
+
+  <main class="contenido">
+    <div class="imagen-grupo">
+      <div id="preview-icono" class="contenedor-icono">📷</div>
+      <div id="menu-seleccion" style="display: none;">
+        <label for="icono-select">Elegir ícono:</label><br />
+        <select id="icono-select">
+          <option value="">-- Ninguno --</option>
+          <option value="👥">👥 Grupo</option>
+          <option value="🍕">🍕 Comida</option>
+          <option value="✈️">✈️ Viaje</option>
+          <option value="🏠">🏠 Casa</option>
+          <option value="🎉">🎉 Fiesta</option>
+          <option value="💼">💼 Trabajo</option>
+        </select><br />
+        <label for="input-imagen">O subir imagen:</label><br />
+        <input type="file" id="input-imagen" accept="image/*" />
+      </div>
+    </div>
+
+    <div class="campo-nombre">
+      <label for="nombre-grupo">Nombre del grupo</label>
+      <input type="text" id="nombre-grupo" placeholder=" " />
+      <div class="linea"></div>
+      <div id="mensaje-error"></div>
+    </div>
+  </main>
+
+  <!-- ✅ solo este script debe quedar -->
+  <script src="nuevo-grupo.js"></script>
+</body>
+</html>

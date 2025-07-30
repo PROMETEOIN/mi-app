@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupos</title>
+  <link rel="stylesheet" href="grupos.css">
+</head>
+<body>
+  <header class="barra-superior">
+    <span style="font-weight: bold;">Mis grupos</span>
+    <button id="cerrar-sesion" style="color: red; border: none; background: none; font-weight: bold; cursor: pointer;">
+      Cerrar sesión
+    </button>
+  </header>
+
+  <main class="contenido">
+    <!-- Aquí aparecerán los grupos -->
+    <div id="lista-grupos" class="lista-grupos"></div>
+
+    <!-- Botón fijo de crear grupo -->
+    <div class="crear-grupo-wrapper">
+      <a href="nuevo-grupo.html" class="btn-crear-grupo">
+        👥 Crear un nuevo grupo
+      </a>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const correo = localStorage.getItem('usuarioActivo');
+      if (!correo) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const keyGrupos = 'grupos_' + correo;
+      const grupos = JSON.parse(localStorage.getItem(keyGrupos)) || [];
+
+      const contenedor = document.getElementById('lista-grupos');
+      contenedor.innerHTML = '';
+
+      if (grupos.length === 0) {
+        contenedor.innerHTML = '<p style="text-align: center; color: gray;">Aún no tienes grupos.</p>';
+      } else {
+        grupos.forEach(grupo => {
+          const grupoDiv = document.createElement('a');
+          grupoDiv.className = 'grupo-item';
+          grupoDiv.href = `grupo.html?id=${grupo.id}`;
+          grupoDiv.innerHTML = `
+            <span class="icono-grupo">${grupo.icono || '👥'}</span>
+            <span class="nombre-grupo">${grupo.nombre}</span>
+          `;
+          contenedor.appendChild(grupoDiv);
+        });
+      }
+
+      const btnCerrarSesion = document.getElementById('cerrar-sesion');
+      if (btnCerrarSesion) {
+        btnCerrarSesion.addEventListener('click', () => {
+          localStorage.removeItem('usuarioActivo');
+          window.location.href = 'login.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
