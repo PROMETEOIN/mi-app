@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grupo</title>
+  <link rel="stylesheet" href="grupo.css" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+  <header class="barra-superior">
+    <a href="grupos.html" class="btn-volver">← Volver</a>
+  </header>
+
+  <header class="grupo-header">
+  <div id="grupo-avatar" class="grupo-avatar"></div>
+  <h1 id="nombre-grupo"></h1>
+  
+</header>
+
+
+  <main>
+    <button id="eliminar-grupo" class="btn-eliminar">Eliminar grupo</button>
+
+    <!-- Modal para agregar miembro -->
+    <div id="formulario-miembro" class="modal-miembro" style="display: none;">
+      <span class="close" id="cerrar-miembro">&times;</span>
+      <h2>Añadir miembro</h2>
+      <form id="form-miembro">
+        <label for="nombre-miembro">Nombre</label>
+        <input type="text" id="nombre-miembro" required />
+
+        <label for="correo-miembro">Correo electrónico (opcional)</label>
+        <input type="email" id="correo-miembro" />
+        <p id="error-duplicado" style="color: red; font-size: 0.9em; display: none; margin: 0.3em 0 0;"></p>
+
+        <hr />
+
+        <button type="submit">Agregar miembro</button>
+      </form>
+    </div>
+
+    <div class="miembros-contenedor">
+      <button id="toggle-miembros">👥 Miembros</button>
+      <button id="btn-anadir-gasto" class="btn-anadir-gasto">➕ Añadir un gasto</button>
+      <button id="btn-liquidar-gasto" class="btn-liquidar-gasto">💰 Liquidar gastos</button>
+      <button id="btn-historial-pagos" class="btn-liquidar-gasto">🧾 Historial de pagos</button>
+      <div id="lista-miembros" class="miembros-lista" style="display: none;">
+        <ul id="miembros-ul"></ul>
+      </div>
+    </div>
+
+    <!-- Modal para agregar gasto -->
+    <div id="modal-gasto" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" id="cerrar-modal">&times;</span>
+        <div id="formulario-gasto">
+          <label>Descripción</label>
+          <input type="text" id="descripcion-gasto" placeholder="Introduce una descripción" />
+          <label>Cantidad</label>
+          <input type="number" id="monto-gasto" placeholder="0.00" />
+          <button id="boton-dividir">Pagado por ti y dividido a partes iguales</button>
+          <button id="guardar-gasto">Guardar</button>
+        </div>
+        <div id="detalle-dividir" style="display: none; margin-top:1em;">
+          <div id="participantes-checkboxes"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para liquidar gastos -->
+    <div id="modal-liquidar" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" id="cerrar-liquidar">&times;</span>
+        <h2>Liquidar Gastos</h2>
+        <ul id="liquidaciones-ul"></ul>
+      </div>
+    </div>
+
+    <!-- Lista de gastos -->
+    <section id="lista-gastos">
+      <h3>Gastos del grupo</h3>
+      <ul id="gastos-ul"></ul>
+    </section>
+
+
+  
+<!-- Modal para pago de deuda -->
+<div id="modal-pago" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" id="cerrar-pago">&times;</span>
+    <h3 id="pago-titulo"></h3>
+    <p id="pago-descripcion"></p>
+    <label for="input-cantidad-pago">Cantidad a pagar</label>
+    <input type="number" id="input-cantidad-pago" min="0.01" step="0.01" />
+    <button id="confirmar-pago">Confirmar pago</button>
+  </div>
+</div>
+
+
+<div id="modal-historial" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" id="cerrar-historial">&times;</span>
+    <h2>Historial de pagos</h2>
+    <input type="text" id="buscador-historial" placeholder="🔍 Buscar pagador..." style="width: 100%; padding: 8px; margin-bottom: 1em; border-radius: 6px; border: 1px solid #ccc;" />
+
+    <ul id="historial-ul"></ul>
+    <button id="limpiar-historial"
+      style="margin:1.5em auto 0 auto; display:block; background:#fff; color:#d32f2f; border:1.5px solid #d32f2f; border-radius:18px; padding:7px 18px; font-weight:600; cursor:pointer;">
+      Limpiar historial
+    </button>
+  </div>
+</div>
+
+
+  </main>
+
+  <footer class="grupo-footer">
+    <button id="btn-anadir" class="btn-anadir">➕ Añadir miembros</button>
+  </footer>
+
+  <script src="grupo.js">
+    const usuario = localStorage.getItem('usuarioActivo');
+if (!usuario) {
+  window.location.href = 'login.html';
+}
+  document.addEventListener('DOMContentLoaded', function () {
+    const correo = localStorage.getItem('usuarioActivo');
+    const keyGrupos = 'grupos_' + correo;
+    const grupos = JSON.parse(localStorage.getItem(keyGrupos)) || [];
+
+    
+  });
+
+
+  </script>
+  <div id="alerta-miembros" class="alerta-visual" style="display: none;">
+  ⚠️ Primero debes añadir al menos un miembro para agregar un gasto.
+</div>
+
+</body>
+
+</html>
